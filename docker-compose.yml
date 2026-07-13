@@ -1,0 +1,37 @@
+services:
+
+  db:
+    image : mysql:8.4
+    container_name: ai_leanrning_db
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD= ${DB_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  backend:
+    build: ./backend
+    container_name: smart_learning_backend
+    env_file: .env
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend-react
+    container_name: smart_learning_frontend
+    restart: unless-stopped
+    ports:
+      - "80:3000"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
