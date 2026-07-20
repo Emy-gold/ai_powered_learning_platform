@@ -1,4 +1,4 @@
-package org.backend.security.services;
+package org.backend.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
