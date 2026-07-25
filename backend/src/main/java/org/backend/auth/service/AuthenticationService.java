@@ -3,11 +3,13 @@ package org.backend.auth.service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.backend.auth.dto.LoginRequest;
 import org.backend.auth.dto.RegistrationRequest;
 import org.backend.domains.user.Roles;
 import org.backend.domains.user.User;
 import org.backend.modules.user.repositories.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
 
+    //Sign up logic
     public User signup(RegistrationRequest request) throws IllegalAccessException{
         if(userRepository.findByEmail(request.getEmail()).isPresent()){
             throw new IllegalAccessException("Email already exists");
@@ -39,4 +42,14 @@ public class AuthenticationService {
         return userRepository.save(user);
     }
 
+    //Log in logic
+    public User login(LoginRequest request){
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getEmail(),
+                        request.getPassword()
+                )
+        );
+        return  userRepository.findByEmail(request.getEmail()).orElseThrow();
+    }
 }
