@@ -1,5 +1,6 @@
 package org.backend.domains.quiz;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +20,8 @@ import java.time.LocalDateTime;
 public class StudentAnswer extends BaseEntity {
 
     private boolean isCorrect;
+
+    @Column(updatable = false)
     private LocalDateTime submittedAt;
 
 }
