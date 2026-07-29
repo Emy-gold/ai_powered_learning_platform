@@ -1,12 +1,14 @@
-package org.backend.domains.quiz;
+package org.backend.domains.assessment;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+
+import java.util.List;
 
 @SuperBuilder
 @Getter
@@ -17,7 +19,10 @@ import org.backend.domains.commun.BaseEntity;
 public class Question extends BaseEntity {
 
     private String questionText;
-    private String questionType;
     private int points;
     private int orderNumber;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private List<QuestionType> questionType;
 }

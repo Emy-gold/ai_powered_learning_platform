@@ -1,27 +1,26 @@
-package org.backend.domains.Enrollement;
+package org.backend.domains.communication;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 @Entity
-public class Enrollment extends BaseEntity {
+@SuperBuilder
+public class Message extends BaseEntity {
 
-    private LocalDateTime enrollmentDate;
+    private String content;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private List<Status> status;
-    private int completionPercentage;
-
+    private List<SenderType> senderType;
 }

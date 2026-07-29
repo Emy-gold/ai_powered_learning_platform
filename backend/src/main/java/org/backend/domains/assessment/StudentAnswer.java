@@ -1,5 +1,6 @@
-package org.backend.domains.lesson;
+package org.backend.domains.assessment;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 
+import java.time.LocalDateTime;
 
 @SuperBuilder
 @Getter
@@ -15,13 +17,11 @@ import org.backend.domains.commun.BaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Lesson extends BaseEntity {
+public class StudentAnswer extends BaseEntity {
 
-    private String title;
-    private String description;
-    private String lessonOrder;
-    private int duration;
-    private boolean isPreview;
+    private boolean isCorrect;
 
+    @Column(updatable = false)
+    private LocalDateTime submittedAt;
 
 }

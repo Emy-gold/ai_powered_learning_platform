@@ -1,6 +1,5 @@
-package org.backend.domains.quiz;
+package org.backend.domains.communication;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,19 +8,13 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 
-import java.time.LocalDateTime;
-
-@SuperBuilder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 @Entity
-public class StudentAnswer extends BaseEntity {
+@SuperBuilder
+public class Chat extends BaseEntity {
 
-    private boolean isCorrect;
-
-    @Column(updatable = false)
-    private LocalDateTime submittedAt;
-
+    private String title;
 }

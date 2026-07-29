@@ -1,4 +1,4 @@
-package org.backend.domains.course;
+package org.backend.domains.learning;
 
 public enum Status {
 

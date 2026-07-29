@@ -1,4 +1,4 @@
-package org.backend.domains.quiz;
+package org.backend.domains.assessment;
 
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -14,11 +14,8 @@ import org.backend.domains.commun.BaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Quiz extends BaseEntity {
+public class Answer extends BaseEntity {
 
-    private String title;
-    private String description;
-    private int passingScore;
-    private int timeLimit;
-
+    private String answerText;
+    private boolean isCorrect;
 }
