@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.profile.StudentProfile;
+import org.backend.domains.profile.TeacherProfile;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -43,6 +45,11 @@ public class User implements UserDetails, Principal {
     @Enumerated(EnumType.STRING)
     private List<Roles> role;
 
+    @OneToOne(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    private StudentProfile studentProfile;
+
+    @OneToOne(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    private TeacherProfile teacherProfile;
 
     @Override
     public String getName() {
