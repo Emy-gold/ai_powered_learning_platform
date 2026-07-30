@@ -1,6 +1,8 @@
 package org.backend.domains.learning;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +25,7 @@ public class Lesson extends BaseEntity {
     private int duration;
     private boolean isPreview;
 
-
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 }

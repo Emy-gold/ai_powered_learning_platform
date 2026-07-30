@@ -29,4 +29,10 @@ public class Course extends BaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<Status> status;
+
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Lesson> lessons;
+
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Enrollment> enrollments;
 }

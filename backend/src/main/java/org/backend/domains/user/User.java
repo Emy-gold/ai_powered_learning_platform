@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.learning.Enrollment;
 import org.backend.domains.profile.StudentProfile;
 import org.backend.domains.profile.TeacherProfile;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -50,6 +51,9 @@ public class User implements UserDetails, Principal {
 
     @OneToOne(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
     private TeacherProfile teacherProfile;
+
+    @OneToMany(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Enrollment> enrollments;
 
     @Override
     public String getName() {
