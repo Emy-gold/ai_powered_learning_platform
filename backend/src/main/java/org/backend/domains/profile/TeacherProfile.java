@@ -1,15 +1,16 @@
 package org.backend.domains.profile;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.learning.Course;
 import org.backend.domains.user.User;
+
+import java.util.List;
 
 @SuperBuilder
 @Getter
@@ -26,4 +27,7 @@ public class TeacherProfile extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id",nullable = false,unique = true)
     private User user;
+
+    @OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Course> course;
 }

@@ -1,8 +1,9 @@
 package org.backend.domains.learning;
 
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,22 +11,21 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 
+import java.util.List;
+
 @SuperBuilder
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Video extends BaseEntity {
+public class Category extends BaseEntity {
 
-    private String title;
+    private String name;
     private String description;
-    private int duration;
-    private int size;
-    private String url;
-    private String quality;
+    private String icon;
 
-    @ManyToOne
-    @JoinColumn(name = "lesson", nullable = false, updatable = true)
-    private Lesson lesson;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Course> courses;
+
 }

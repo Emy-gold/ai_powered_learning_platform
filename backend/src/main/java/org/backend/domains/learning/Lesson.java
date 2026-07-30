@@ -1,14 +1,14 @@
 package org.backend.domains.learning;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+
+import java.util.List;
 
 
 @SuperBuilder
@@ -28,4 +28,7 @@ public class Lesson extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+
+    @OneToMany(mappedBy = "lesson",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Video> videos;
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.profile.TeacherProfile;
 
 import java.util.List;
 
@@ -35,4 +36,12 @@ public class Course extends BaseEntity {
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
+
+    @ManyToOne
+    @JoinColumn(name = "teacher")
+    private TeacherProfile teacher;
+
+    @ManyToOne
+    @JoinColumn(name = "category",nullable = false, updatable = true)
+    private Category category;
 }
