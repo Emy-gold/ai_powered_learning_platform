@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.backend.domains.assessment.Quiz;
 import org.backend.domains.commun.BaseEntity;
 
 import java.util.List;
@@ -31,4 +32,7 @@ public class Lesson extends BaseEntity {
 
     @OneToMany(mappedBy = "lesson",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Video> videos;
+
+    @OneToMany(mappedBy = "lesson",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Quiz> quizzes;
 }

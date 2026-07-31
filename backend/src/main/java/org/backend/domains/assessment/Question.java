@@ -25,4 +25,14 @@ public class Question extends BaseEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
     private List<QuestionType> questionType;
+
+    @ManyToOne
+    @JoinColumn(name = "quiz", nullable = false, updatable = false)
+    private Quiz quiz;
+
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Answer> answers;
+
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    private List<StudentAnswer> studentAnswers;
 }

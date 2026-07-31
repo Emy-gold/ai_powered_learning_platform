@@ -1,12 +1,15 @@
 package org.backend.domains.assessment;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.learning.Lesson;
+
+import java.util.List;
 
 @SuperBuilder
 @Getter
@@ -20,5 +23,12 @@ public class Quiz extends BaseEntity {
     private String description;
     private int passingScore;
     private int timeLimit;
+
+    @ManyToOne
+    @JoinColumn(name = "lesson", nullable = false, updatable = true)
+    private Lesson lesson;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Question> questions;
 
 }

@@ -1,12 +1,14 @@
 package org.backend.domains.assessment;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+
+import java.util.List;
 
 @SuperBuilder
 @Getter
@@ -18,4 +20,11 @@ public class Answer extends BaseEntity {
 
     private String answerText;
     private boolean isCorrect;
+
+    @ManyToOne
+    @JoinColumn(name = "question",nullable = false,updatable = true)
+    private Question question;
+
+    @OneToMany(mappedBy = "answer",cascade = CascadeType.ALL)
+    private List<StudentAnswer> studentAnswers;
 }
