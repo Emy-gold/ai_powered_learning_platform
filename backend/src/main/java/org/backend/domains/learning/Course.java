@@ -44,4 +44,8 @@ public class Course extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "category",nullable = false, updatable = true)
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "progress",nullable = false, updatable = true)
+    private Progress progress;
 }

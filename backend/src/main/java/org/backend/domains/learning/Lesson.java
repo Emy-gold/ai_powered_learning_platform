@@ -35,4 +35,8 @@ public class Lesson extends BaseEntity {
 
     @OneToMany(mappedBy = "lesson",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Quiz> quizzes;
+
+    @ManyToOne
+    @JoinColumn(name = "progress",nullable = false, updatable = true)
+    private Progress progress;
 }

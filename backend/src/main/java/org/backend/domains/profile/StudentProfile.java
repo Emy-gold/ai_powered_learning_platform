@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.learning.Progress;
 import org.backend.domains.user.User;
 
 import java.util.List;
@@ -31,4 +32,8 @@ public class StudentProfile extends BaseEntity {
     @OneToOne
     @JoinColumn(name = "user_id",nullable = false,unique = true)
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "progress",nullable = false, updatable = true)
+    private Progress progress;
 }
