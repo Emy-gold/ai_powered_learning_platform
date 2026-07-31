@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 import org.backend.domains.learning.Progress;
+import org.backend.domains.learning.Submission;
 import org.backend.domains.user.User;
 
 import java.util.List;
@@ -36,4 +37,7 @@ public class StudentProfile extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "progress",nullable = false, updatable = true)
     private Progress progress;
+
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    private List<Submission> submissions;
 }
