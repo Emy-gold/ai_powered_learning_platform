@@ -33,4 +33,8 @@ public class Submission extends BaseEntity {
     @JoinColumn(name = "student",nullable = false)
     private StudentProfile student;
 
+    @ManyToOne
+    @JoinColumn(name = "assignment",nullable = false)
+    private Assignment assignment;
+
 }
