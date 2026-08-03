@@ -46,13 +46,13 @@ public class User implements UserDetails, Principal {
     @Enumerated(EnumType.STRING)
     private List<Roles> role;
 
-    @OneToOne(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private StudentProfile studentProfile;
 
-    @OneToOne(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private TeacherProfile teacherProfile;
 
-    @OneToMany(mappedBy = "user_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Enrollment> enrollments;
 
     @Override
