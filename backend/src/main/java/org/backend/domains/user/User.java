@@ -30,10 +30,9 @@ public class User implements UserDetails, Principal {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
-    @Getter
     @Column(unique = true)
     private String email;
     private String password;

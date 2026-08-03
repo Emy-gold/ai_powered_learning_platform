@@ -21,7 +21,7 @@ import java.util.List;
 public class TeacherProfile extends BaseEntity {
 
     private String speciality;
-    private int experience;
+    private Integer experience;
     private String education;
 
     @OneToOne
@@ -29,5 +29,5 @@ public class TeacherProfile extends BaseEntity {
     private User user;
 
     @OneToMany(mappedBy = "teacher",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Course> course;
+    private List<Course> courses;
 }
