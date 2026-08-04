@@ -22,9 +22,9 @@ public class Lesson extends BaseEntity {
 
     private String title;
     private String description;
-    private String lessonOrder;
-    private int duration;
-    private boolean isPreview;
+    private Integer lessonOrder;
+    private Integer duration;
+    private boolean preview = false;
 
     @ManyToOne
     @JoinColumn(name = "course_id")

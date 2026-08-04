@@ -7,7 +7,10 @@ import lombok.Setter;
 import org.backend.domains.learning.Language;
 import org.backend.domains.learning.Level;
 import org.backend.domains.learning.Status;
+import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.teacher.dto.TeacherResponse;
+
+import java.util.List;
 
 @Getter
 @Setter

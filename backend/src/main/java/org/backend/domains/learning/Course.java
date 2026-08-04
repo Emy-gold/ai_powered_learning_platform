@@ -27,7 +27,7 @@ public class Course extends BaseEntity {
     private Language language;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.DRAFT;
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lesson> lessons;
