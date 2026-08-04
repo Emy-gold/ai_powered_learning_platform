@@ -19,17 +19,15 @@ public class Course extends BaseEntity {
     private String title;
     private String description;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private List<Level> level;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private List<Language> language;
+    private Level level;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private List<Status> status;
+    private Language language;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lesson> lessons;
@@ -38,14 +36,14 @@ public class Course extends BaseEntity {
     private List<Enrollment> enrollments;
 
     @ManyToOne
-    @JoinColumn(name = "teacher")
+    @JoinColumn(name = "teacher_id")
     private TeacherProfile teacher;
 
     @ManyToOne
-    @JoinColumn(name = "category",nullable = false, updatable = true)
+    @JoinColumn(name = "category_id",nullable = false, updatable = true)
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name = "progress",nullable = false, updatable = true)
-    private Progress progress;
+    @OneToMany(mappedBy = "course",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Progress> progresses;
+
 }

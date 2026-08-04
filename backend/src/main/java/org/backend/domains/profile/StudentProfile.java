@@ -25,19 +25,18 @@ public class StudentProfile extends BaseEntity {
     private String fieldOfStudy;
     private String learningGoal;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private List<EducationLevel> educationLevel;
+    private EducationLevel educationLevel;
 
 
     @OneToOne
     @JoinColumn(name = "user_id",nullable = false,unique = true)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "progress",nullable = false, updatable = true)
-    private Progress progress;
 
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Progress> progresses;
+
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Submission> submissions;
 }

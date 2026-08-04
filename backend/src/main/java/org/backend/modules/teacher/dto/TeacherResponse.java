@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.backend.domains.learning.Course;
+import org.backend.modules.course.dto.CourseResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;

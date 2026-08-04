@@ -1,8 +1,6 @@
 package org.backend.domains.learning;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,16 +20,19 @@ import java.util.List;
 @Entity
 public class Progress extends BaseEntity {
 
-    @OneToMany(mappedBy = "progress",cascade = CascadeType.ALL)
-    private List<StudentProfile> studentProfiles;
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private StudentProfile student;
 
-    @OneToMany(mappedBy = "progress",cascade = CascadeType.ALL)
-    private List<Course> course;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-    @OneToMany(mappedBy = "progress",cascade = CascadeType.ALL)
-    private List<Lesson> lessons;
+    @ManyToOne
+    @JoinColumn(name = "lesson_id")
+    private Lesson lesson;
 
-    private int progressPercentage;
+    private Integer progressPercentage;
     private boolean completed;
     private LocalDateTime lastAccessedAt;
 }
