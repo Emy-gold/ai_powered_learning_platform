@@ -30,8 +30,5 @@ public class CourseRequest {
     private Language language;
 
     @NotNull
-    private Long teacherId;
-
-    @NotNull
     private Long categoryId;
 }
