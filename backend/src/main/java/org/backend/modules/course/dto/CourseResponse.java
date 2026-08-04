@@ -7,6 +7,8 @@ import lombok.Setter;
 import org.backend.domains.learning.Language;
 import org.backend.domains.learning.Level;
 import org.backend.domains.learning.Status;
+import org.backend.modules.category.dto.CategoryResponse;
+import org.backend.modules.enrollment.dto.EnrollmentResponse;
 import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.teacher.dto.TeacherResponse;
 
@@ -25,7 +27,6 @@ public class CourseResponse {
     private Language language;
     private Status status;
     private List<LessonResponse> lessons;
-    private List<EnrollementResponse> enrollments;
     private TeacherResponse teacher;
     private CategoryResponse category;
 }

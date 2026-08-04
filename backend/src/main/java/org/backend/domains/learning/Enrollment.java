@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.backend.domains.commun.BaseEntity;
+import org.backend.domains.profile.StudentProfile;
 import org.backend.domains.user.User;
 
 import java.time.LocalDateTime;
@@ -19,16 +20,15 @@ import java.util.List;
 public class Enrollment extends BaseEntity {
 
     private LocalDateTime enrollmentDate;
-    @ElementCollection(fetch = FetchType.EAGER)
+
     @Enumerated(EnumType.STRING)
-    private List<EnrollmentStatus> status;
-    private int completionPercentage;
+    private EnrollmentStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "user",nullable = false)
-    private User user;
+    @JoinColumn(name = "student_id", nullable = false)
+    private StudentProfile student;
 
     @ManyToOne
-    @JoinColumn(name = "course",nullable = false)
+    @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 }
