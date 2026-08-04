@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.backend.modules.assignment.dto.AssignmentResponse;
+
+import java.util.List;
 
 
 @Getter
@@ -27,6 +30,4 @@ public class LessonResponse {
     private List<VideoResponse> videos;
 
     private List<QuizResponse> quizzes;
-
-    private List<AssignmentResponse> assignments;
 }
