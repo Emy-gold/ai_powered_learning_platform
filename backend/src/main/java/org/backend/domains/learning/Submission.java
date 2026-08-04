@@ -30,11 +30,11 @@ public class Submission extends BaseEntity {
     private LocalDateTime submittedAt;
 
     @ManyToOne
-    @JoinColumn(name = "student",nullable = false)
+    @JoinColumn(name = "student_id",nullable = false)
     private StudentProfile student;
 
     @ManyToOne
-    @JoinColumn(name = "assignment",nullable = false)
+    @JoinColumn(name = "assignment_id",nullable = false)
     private Assignment assignment;
 
 }
