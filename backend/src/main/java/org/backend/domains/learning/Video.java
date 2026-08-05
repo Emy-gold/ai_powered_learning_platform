@@ -1,8 +1,6 @@
 package org.backend.domains.learning;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +21,9 @@ public class Video extends BaseEntity {
     private int duration;
     private int size;
     private String url;
-    private String quality;
+
+    @Enumerated(EnumType.STRING)
+    private VideoQuality quality;
 
     @ManyToOne
     @JoinColumn(name = "lesson", nullable = false, updatable = true)

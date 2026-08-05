@@ -27,7 +27,4 @@ public class LessonResponse {
 
     private boolean preview;
 
-    private List<VideoResponse> videos;
-
-    private List<QuizResponse> quizzes;
 }
