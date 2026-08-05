@@ -33,6 +33,6 @@ public class Progress extends BaseEntity {
     private Lesson lesson;
 
     private Integer progressPercentage;
-    private boolean completed;
+    private boolean completed = false;
     private LocalDateTime lastAccessedAt;
 }
