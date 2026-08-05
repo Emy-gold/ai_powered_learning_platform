@@ -18,14 +18,14 @@ public class Video extends BaseEntity {
 
     private String title;
     private String description;
-    private int duration;
-    private int size;
+    private  Integer  duration;
+    private Integer size;
     private String url;
 
     @Enumerated(EnumType.STRING)
     private VideoQuality quality;
 
     @ManyToOne
-    @JoinColumn(name = "lesson", nullable = false, updatable = true)
+    @JoinColumn(name = "lesson_id", nullable = false, updatable = true)
     private Lesson lesson;
 }

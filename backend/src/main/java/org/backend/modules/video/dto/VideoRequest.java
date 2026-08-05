@@ -20,12 +20,15 @@ public class VideoRequest {
     @NotBlank
     private String description;
 
-    private int duration;
+    private Integer duration;
 
-    private int size;
+    private Integer size;
 
     @NotBlank
     private String url;
 
     private VideoQuality quality;
+
+    @NotNull
+    private Long lessonId;
 }

@@ -16,8 +16,8 @@ public class VideoResponse {
     private Long id;
     private String title;
     private String description;
-    private int duration;
-    private int size;
+    private Integer duration;
+    private Integer size;
     private String url;
     private VideoQuality quality;
     private LessonResponse lesson;
