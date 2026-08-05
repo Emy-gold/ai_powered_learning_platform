@@ -22,11 +22,10 @@ import java.util.Locale;
 public class Submission extends BaseEntity {
 
     private String content;
-    @ElementCollection
     @Enumerated(EnumType.STRING)
-    private List<submissionStatus> status;
+    private submissionStatus status = submissionStatus.PENDING;
     private String feedback;
-    private double score;
+    private Double score;
     private LocalDateTime submittedAt;
 
     @ManyToOne
