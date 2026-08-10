@@ -19,12 +19,11 @@ import java.util.List;
 public class Question extends BaseEntity {
 
     private String questionText;
-    private int points;
-    private int orderNumber;
+    private Integer points;
+    private Integer orderNumber;
 
-    @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private List<QuestionType> questionType;
+    private QuestionType questionType;
 
     @ManyToOne
     @JoinColumn(name = "quiz", nullable = false, updatable = false)
@@ -33,6 +32,6 @@ public class Question extends BaseEntity {
     @OneToMany(mappedBy = "question",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Answer> answers;
 
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentAnswer> studentAnswers;
 }

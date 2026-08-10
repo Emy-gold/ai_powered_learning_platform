@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.backend.modules.lesson.dto.LessonResponse;
+import org.backend.modules.question.dto.QuestionResponse;
+
+import java.util.List;
 
 @Getter
 @Setter
