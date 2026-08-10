@@ -1,24 +1,21 @@
 package org.backend.modules.chat.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.backend.modules.user.dto.UserResponse;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChatResponse {
+public class ChatRequest {
 
-    private Long id;
     private String title;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private boolean archived;
-    private List<UserResponse> participants;
+
+    @NotEmpty
+    private List<Long> participantIds;
 }
