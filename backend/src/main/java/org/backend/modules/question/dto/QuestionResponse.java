@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.backend.domains.assessment.QuestionType;
+import org.backend.modules.answer.dto.AnswerResponse;
 import org.backend.modules.quiz.dto.QuizResponse;
+
+import java.util.List;
 
 @Getter
 @Setter
