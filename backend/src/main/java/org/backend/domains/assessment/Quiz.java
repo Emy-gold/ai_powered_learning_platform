@@ -21,8 +21,8 @@ public class Quiz extends BaseEntity {
 
     private String title;
     private String description;
-    private int passingScore;
-    private int timeLimit;
+    private Integer passingScore;
+    private Integer timeLimit;
 
     @ManyToOne
     @JoinColumn(name = "lesson", nullable = false, updatable = true)
