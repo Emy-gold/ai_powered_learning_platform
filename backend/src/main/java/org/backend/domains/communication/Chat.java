@@ -1,6 +1,6 @@
 package org.backend.domains.communication;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,21 +8,29 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity
-@SuperBuilder
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
+@Entity
+@SuperBuilder
 public class Chat extends BaseEntity {
 
     private String title;
 
-    private LocalDateTime createdAt;
+    @OneToMany(
+            mappedBy = "chat",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<ChatParticipant> participants;
 
-    private LocalDateTime updatedAt;
-
-    private boolean archived;
+    @OneToMany(
+            mappedBy = "chat",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Message> messages;
 }
