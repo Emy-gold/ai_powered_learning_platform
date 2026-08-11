@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface StudentRepository extends CrudRepository<StudentProfile, Long> {
 
     Optional<StudentProfile> findByUserId(Long userId);
+    boolean existsByUserId(Long userId);
 }
