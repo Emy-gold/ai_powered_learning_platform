@@ -4,11 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.backend.domains.learning.Language;
 import org.backend.domains.learning.Level;
 import org.backend.domains.learning.Status;
 import org.backend.modules.category.dto.CategoryResponse;
-import org.backend.modules.enrollment.dto.EnrollmentResponse;
 import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.teacher.dto.TeacherResponse;
 
@@ -18,6 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class CourseResponse {
 
     private Long id;
