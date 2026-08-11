@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.backend.modules.course.dto.CourseResponse;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class TeacherResponse {
 
     private Long id;
@@ -22,6 +24,5 @@ public class TeacherResponse {
     private int experience;
     private String speciality;
     private String education;
-    private List<CourseResponse> courses;
     private Long userId;
 }

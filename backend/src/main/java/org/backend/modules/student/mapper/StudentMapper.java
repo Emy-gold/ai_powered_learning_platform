@@ -18,6 +18,7 @@ public class StudentMapper {
                 .fieldOfStudy(student.getFieldOfStudy())
                 .learningGoal(student.getLearningGoal())
                 .educationLevel(student.getEducationLevel())
+                .userId(student.getUser().getId())
                 .build();
     }
 

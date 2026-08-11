@@ -28,5 +28,7 @@ public class StudentResponse {
 
     private EducationLevel educationLevel;
 
+    private Long userId;
+
 
 }
