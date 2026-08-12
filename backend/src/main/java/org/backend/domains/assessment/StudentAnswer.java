@@ -28,12 +28,12 @@ public class StudentAnswer extends BaseEntity {
     private LocalDateTime submittedAt;
 
     @ManyToOne
-    @JoinColumn(name = "question", nullable = false)
+    @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
 
     @ManyToOne
-    @JoinColumn(name = "answer")
+    @JoinColumn(name = "answer_id")
     private Answer answer;
 
 }

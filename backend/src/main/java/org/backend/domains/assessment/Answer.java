@@ -25,6 +25,6 @@ public class Answer extends BaseEntity {
     @JoinColumn(name = "question_id",nullable = false,updatable = true)
     private Question question;
 
-    @OneToMany(mappedBy = "answer_id",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "answer",cascade = CascadeType.ALL)
     private List<StudentAnswer> studentAnswers;
 }

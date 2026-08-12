@@ -51,9 +51,6 @@ public class User implements UserDetails, Principal {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private TeacherProfile teacherProfile;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Enrollment> enrollments;
-
     @Override
     public String getName() {
         return email;

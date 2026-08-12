@@ -29,7 +29,7 @@ public class Assignment extends BaseEntity {
     @JoinColumn(name = "lesson_id",nullable = false)
     private Lesson lesson;
 
-    @OneToMany(mappedBy = "assignment_id",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assignment",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Submission> submissions;
 
 }

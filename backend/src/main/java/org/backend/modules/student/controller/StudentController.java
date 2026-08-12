@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     //----------Get all students---------------------------------------
-    @GetMapping("/students")
+    @RequestMapping("api/v1/students")
     public ResponseEntity<List<StudentResponse>> getAll(){
         return ResponseEntity.ok(service.getAll());
     }
@@ -52,7 +52,7 @@ public class StudentController {
     @PreAuthorize("hasAnyAuthority('STUDENT','ADMIN')")
     public ResponseEntity<StudentResponse> update(
         @PathVariable Long id,
-        StudentUpdateRequest request
+        @RequestBody StudentUpdateRequest request
     ){
         return ResponseEntity.ok(service.update(id, request));
     }
