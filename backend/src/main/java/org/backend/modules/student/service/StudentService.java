@@ -10,11 +10,9 @@ import org.backend.modules.student.dto.StudentUpdateRequest;
 import org.backend.modules.student.mapper.StudentMapper;
 import org.backend.modules.student.repository.StudentRepository;
 import org.backend.modules.user.repositories.UserRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service

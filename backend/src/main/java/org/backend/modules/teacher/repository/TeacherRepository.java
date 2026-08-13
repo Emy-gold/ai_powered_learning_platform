@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface TeacherRepository extends CrudRepository<TeacherProfile, Long> {
 
     Optional<TeacherProfile> findByUserId(Long userId);
+    boolean existsByUserId(Long userId);
 }
