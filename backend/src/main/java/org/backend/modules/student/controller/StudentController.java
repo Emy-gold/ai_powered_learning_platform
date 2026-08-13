@@ -44,6 +44,7 @@ public class StudentController {
     //----------Get all students---------------------------------------
     @RequestMapping("api/v1/students")
     public ResponseEntity<List<StudentResponse>> getAll(){
+
         return ResponseEntity.ok(service.getAll());
     }
 
