@@ -8,6 +8,7 @@ import org.backend.modules.student.mapper.StudentMapper;
 import org.backend.modules.student.repository.StudentRepository;
 import org.backend.modules.teacher.dto.TeacherRequest;
 import org.backend.modules.teacher.dto.TeacherResponse;
+import org.backend.modules.teacher.dto.TeacherUpdateRequest;
 import org.backend.modules.teacher.mapper.TeacherMapper;
 import org.backend.modules.teacher.repository.TeacherRepository;
 import org.backend.modules.user.repositories.UserRepository;
@@ -65,5 +66,31 @@ public class TeacherService {
     }
 
     //------------------------Update the teacher profile ------------------------------------
+    @Transactional
+    public TeacherResponse update(Long id, TeacherUpdateRequest request){
+        TeacherProfile teacherProfile = teacherRepository.findById(id)
+                .orElseThrow(() -> new  RuntimeException("Teacher profile not found"));
 
+        //Update the teacher fields
+        teacherProfile.setExperience(request.getExperience());
+        teacherProfile.setSpeciality(request.getSpeciality());
+        teacherProfile.setEducation(request.getEducation());
+
+        //Update the user fields
+        User user = teacherProfile.getUser();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+
+        return teacherMapper.toResponse(teacherProfile);
+    }
+
+    //-------------------------Delete the teacher profile-----------------------------------
+    @Transactional
+    public void delete(Long id){
+        if(!teacherRepository.existsById(id)){
+            throw new RuntimeException("Teacher profile does not exist");
+        }
+        teacherRepository.deleteById(id);
+    }
 }
