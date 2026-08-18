@@ -31,4 +31,7 @@ public class CourseRequest {
 
     @NotNull
     private Long categoryId;
+
+    @NotNull
+    private Long teacherId;
 }

@@ -9,6 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CourseRepository extends CrudRepository<Course, Long> {
 
-    Optional<Course> findByUserId(Long userId);
-    boolean exitsByUserId(Long userId);
+    Optional<Course> findByTeacherId(Long userId);
 }
