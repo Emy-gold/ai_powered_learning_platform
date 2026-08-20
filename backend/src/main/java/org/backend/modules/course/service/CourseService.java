@@ -11,6 +11,8 @@ import org.backend.modules.course.dto.CourseResponse;
 import org.backend.modules.course.mapper.CourseMapper;
 import org.backend.modules.course.repository.CourseRepository;
 import org.backend.modules.teacher.repository.TeacherRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -50,6 +52,25 @@ public class CourseService {
     //----------------------Get the course by teacher id-----------------------------------
     public List<CourseResponse> getByTeacherId(Long teacherId){
         return courseRepository.findByTeacherId(teacherId)
+                .stream()
+                .map(courseMapper::toResponse)
+                .toList();
+    }
+
+    //-----------------------My courses-------------------------------------------------------
+    @Transactional
+    public List<CourseResponse> getMyCourses() {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        String email = authentication.getName();
+
+        TeacherProfile teacher = teacherRepository.findByUserEmail(email)
+                .orElseThrow(() ->
+                        new RuntimeException("Teacher profile not found"));
+
+        return courseRepository.findByTeacherId(teacher.getId())
                 .stream()
                 .map(courseMapper::toResponse)
                 .toList();

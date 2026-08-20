@@ -60,4 +60,12 @@ public class CourseController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    //----------------------Get my courses -----------------------------------------------------
+    @GetMapping("/my-courses")
+    @PreAuthorize("hasAuthority('TEACHER')")
+    public ResponseEntity<List<CourseResponse>> getMyCourses() {
+        return ResponseEntity.ok(service.getMyCourses());
+    }
 }

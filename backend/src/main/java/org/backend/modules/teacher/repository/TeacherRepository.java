@@ -9,4 +9,5 @@ public interface TeacherRepository extends CrudRepository<TeacherProfile, Long> 
 
     Optional<TeacherProfile> findByUserId(Long userId);
     boolean existsByUserId(Long userId);
+    Optional<TeacherProfile> findByUserEmail(String email);
 }
