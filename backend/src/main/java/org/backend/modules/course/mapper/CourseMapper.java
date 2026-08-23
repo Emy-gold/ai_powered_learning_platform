@@ -69,7 +69,7 @@ public class CourseMapper {
                 .build();
     }
 
-    public Course  toEntity(CourseRequest request){
+    public Course toEntity(CourseRequest request){
 
             Course course = new Course();
             course.setTitle(request.getTitle());
