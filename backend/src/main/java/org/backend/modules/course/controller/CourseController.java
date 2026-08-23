@@ -68,4 +68,12 @@ public class CourseController {
     public ResponseEntity<List<CourseResponse>> getMyCourses() {
         return ResponseEntity.ok(service.getMyCourses());
     }
+
+    //-----------------------Get the title--------------------------------------------------
+    @GetMapping("/search")
+    public ResponseEntity<List<CourseResponse>> searchByTitle(
+            @RequestParam String title) {
+
+        return ResponseEntity.ok(service.searchByTitle(title));
+    }
 }

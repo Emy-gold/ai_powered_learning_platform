@@ -1,6 +1,6 @@
 package org.backend.modules.course.service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.backend.domains.learning.Category;
 import org.backend.domains.learning.Course;
@@ -30,26 +30,23 @@ public class CourseService {
     //--------------------------Create the course function-----------------------------
     @Transactional
     public CourseResponse create(CourseRequest request){
+
+        Course course = courseMapper.toEntity(request);
+
         TeacherProfile teacher = teacherRepository.findById(request.getTeacherId())
                 .orElseThrow(() -> new RuntimeException("Teacher not found"));
 
         Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        Course course = new Course();
-
-        course.setTitle(request.getTitle());
-        course.setDescription(request.getDescription());
-        course.setLevel(request.getLevel());
-        course.setLanguage(request.getLanguage());
         course.setTeacher(teacher);
         course.setCategory(category);
 
-        Course savedCourse = courseRepository.save(course);
-        return courseMapper.toResponse(savedCourse);
+        return courseMapper.toResponse(courseRepository.save(course));
     }
 
     //----------------------Get the course by teacher id-----------------------------------
+    @Transactional(readOnly = true)
     public List<CourseResponse> getByTeacherId(Long teacherId){
         return courseRepository.findByTeacherId(teacherId)
                 .stream()
@@ -58,7 +55,7 @@ public class CourseService {
     }
 
     //-----------------------My courses-------------------------------------------------------
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CourseResponse> getMyCourses() {
 
         Authentication authentication =
@@ -77,6 +74,7 @@ public class CourseService {
     }
 
     //----------------------Get course by id-----------------------------------------------
+    @Transactional(readOnly = true)
     public CourseResponse getById(Long id){
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
@@ -92,6 +90,15 @@ public class CourseService {
 
         return courses;
     }
+    //--------------------------Search by title---------------------------------------------
+    @Transactional(readOnly = true)
+    public List<CourseResponse> searchByTitle(String title) {
+
+        return courseRepository.findByTitleContainingIgnoreCase(title)
+                .stream()
+                .map(courseMapper::toResponse)
+                .toList();
+    }
 
     //---------------------Update the course -------------------------------------------------
     @Transactional
@@ -99,7 +106,7 @@ public class CourseService {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 
-        Category category = categoryRepository.findById(id)
+        Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
         course.setTitle(request.getTitle());
