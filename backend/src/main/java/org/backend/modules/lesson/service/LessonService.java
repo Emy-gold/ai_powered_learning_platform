@@ -11,6 +11,7 @@ import org.backend.modules.lesson.mapper.LessonMapper;
 import org.backend.modules.lesson.repository.LessonRepository;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +49,31 @@ public class LessonService {
         for(Lesson lesson : lessonRepository.findAll()){
             lessons.add(lessonMapper.toResponse(lesson));
         }
-
         return lessons;
+    }
+
+    //---------------------------------Update the lesson----------------------------------------
+    @Transactional
+    public LessonResponse update(Long id, LessonRequest request){
+        Lesson lesson = lessonRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("The lesson does not exists"));
+
+        lesson.setTitle(request.getTitle());
+        lesson.setDescription(request.getDescription());
+        lesson.setLessonOrder(request.getLessonOrder());
+        lesson.setDuration(request.getDuration());
+        lesson.setPreview(request.isPreview());
+
+        Lesson saved = lessonRepository.save(lesson);
+        return lessonMapper.toResponse(saved);
+    }
+
+    //------------------------Delete the lesson-----------------------------------------------
+    @Transactional
+    public void delete(Long id){
+        if(!lessonRepository.existsById(id)){
+            throw new RuntimeException("Lesson does not exists");
+        }
+        lessonRepository.deleteById(id);
     }
 }

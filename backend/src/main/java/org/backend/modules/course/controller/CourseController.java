@@ -37,7 +37,7 @@ public class CourseController {
     }
 
     //-------------------------Get by teacher id----------------------------------------------
-    @GetMapping("teacher/teacherId")
+    @GetMapping("teacher/{teacherId}")
     public ResponseEntity<List<CourseResponse>> getByTeacherId(@PathVariable Long teacherId){
         return ResponseEntity.ok(service.getByTeacherId(teacherId));
     }
