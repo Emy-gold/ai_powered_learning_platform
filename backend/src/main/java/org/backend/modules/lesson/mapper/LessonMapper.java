@@ -3,11 +3,10 @@ package org.backend.modules.lesson.mapper;
 import org.backend.domains.learning.Lesson;
 import org.backend.modules.lesson.dto.LessonRequest;
 import org.backend.modules.lesson.dto.LessonResponse;
-import org.backend.modules.quiz.dto.QuizResponse;
+import org.backend.modules.quiz.mapper.QuizMapper;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Component
 public class LessonMapper {
