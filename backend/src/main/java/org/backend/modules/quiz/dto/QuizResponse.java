@@ -20,6 +20,5 @@ public class QuizResponse {
     private String description;
     private Integer passingScore;
     private Integer timeLimit;
-    private LessonResponse lesson;
     private List<QuestionResponse> questions;
 }

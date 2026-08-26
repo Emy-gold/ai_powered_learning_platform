@@ -3,12 +3,19 @@ package org.backend.modules.lesson.mapper;
 import org.backend.domains.learning.Lesson;
 import org.backend.modules.lesson.dto.LessonRequest;
 import org.backend.modules.lesson.dto.LessonResponse;
+import org.backend.modules.quiz.dto.QuizResponse;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class LessonMapper {
 
+    private final QuizMapper quizMapper;
+
     public LessonResponse toResponse(Lesson lesson) {
+
 
         return LessonResponse.builder()
                 .id(lesson.getId())
@@ -17,6 +24,10 @@ public class LessonMapper {
                 .lessonOrder(lesson.getLessonOrder())
                 .duration(lesson.getDuration())
                 .preview(lesson.isPreview())
+                .quizzes(lesson.getQuizzes()
+                        .stream()
+                        .map(quizMapper::toResponse)
+                        .toList())
                 .build();
     }
 

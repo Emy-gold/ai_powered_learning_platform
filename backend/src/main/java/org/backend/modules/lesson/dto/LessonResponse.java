@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.modules.assignment.dto.AssignmentResponse;
+import org.backend.modules.quiz.dto.QuizResponse;
 
 import java.util.List;
 
@@ -28,5 +29,7 @@ public class LessonResponse {
     private Integer duration;
 
     private boolean preview;
+
+    private List<QuizResponse> quizzes;
 
 }

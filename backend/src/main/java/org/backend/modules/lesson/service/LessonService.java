@@ -9,11 +9,15 @@ import org.backend.modules.lesson.dto.LessonRequest;
 import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.lesson.mapper.LessonMapper;
 import org.backend.modules.lesson.repository.LessonRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -54,9 +58,16 @@ public class LessonService {
 
     //---------------------------------Update the lesson----------------------------------------
     @Transactional
-    public LessonResponse update(Long id, LessonRequest request){
+    public LessonResponse update(Long id, LessonRequest request, Long userId, Authentication authentication) throws AccessDeniedException {
         Lesson lesson = lessonRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The lesson does not exists"));
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if(!isAdmin && !lesson.getCreatedBy().equals(userId)){
+            throw new AccessDeniedException("You do not have access to this lesson");
+        };
 
         lesson.setTitle(request.getTitle());
         lesson.setDescription(request.getDescription());
@@ -70,10 +81,17 @@ public class LessonService {
 
     //------------------------Delete the lesson-----------------------------------------------
     @Transactional
-    public void delete(Long id){
-        if(!lessonRepository.existsById(id)){
-            throw new RuntimeException("Lesson does not exists");
+    public void delete(Long id, Long userId,Authentication authentication) throws AccessDeniedException {
+        Lesson lesson = lessonRepository.findById(id)
+                        .orElseThrow(() -> new RuntimeException("Lesson does not exist"));
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin && !lesson.getCreatedBy().equals(userId)) {
+            throw new AccessDeniedException("You do not own this lesson");
         }
+
         lessonRepository.deleteById(id);
     }
 }
