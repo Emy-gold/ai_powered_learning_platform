@@ -9,5 +9,4 @@ import java.util.Optional;
 @Repository
 public interface LessonRepository extends CrudRepository<Lesson, Long> {
 
-    Optional<Lesson> findById(Long id);
 }
