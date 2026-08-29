@@ -58,7 +58,8 @@ public class LessonService {
 
     //---------------------------------Update the lesson----------------------------------------
     @Transactional
-    public LessonResponse update(Long id, LessonRequest request, Long userId, Authentication authentication) throws AccessDeniedException {
+    public LessonResponse update(Long id, LessonRequest request, Long userId, Authentication authentication)
+            throws AccessDeniedException {
         Lesson lesson = lessonRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The lesson does not exists"));
 

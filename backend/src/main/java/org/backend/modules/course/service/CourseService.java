@@ -1,5 +1,7 @@
 package org.backend.modules.course.service;
 
+import org.backend.domains.learning.Lesson;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.backend.domains.learning.Category;
@@ -102,9 +104,17 @@ public class CourseService {
 
     //---------------------Update the course -------------------------------------------------
     @Transactional
-    public CourseResponse update(Long id, CourseRequest request){
+    public CourseResponse update(Long id, CourseRequest request, Long userId, Authentication authentication )
+        throws AccessDeniedException {
         Course course = courseRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if(!isAdmin && !course.getCreatedBy().equals(userId)){
+            throw new AccessDeniedException("You dont have access to this course");
+        }
 
         Category category = categoryRepository.findById(request.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
@@ -121,9 +131,17 @@ public class CourseService {
 
     //----------------------Delete the course ----------------------------------------
     @Transactional
-    public void delete(Long id){
-        if(!courseRepository.existsById(id)){
-            throw new RuntimeException("Course does not exists");
+    public void delete(Long id , Long userId, Authentication authentication ) throws  AccessDeniedException
+    {
+
+        Course course = courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course does not exist"));
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
+
+        if (!isAdmin && !course.getCreatedBy().equals(userId)) {
+            throw new AccessDeniedException("You do not own this course");
         }
         courseRepository.deleteById(id);
     }

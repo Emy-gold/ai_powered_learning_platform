@@ -5,7 +5,9 @@ import org.backend.modules.course.dto.CourseRequest;
 import org.backend.modules.course.dto.CourseResponse;
 import org.backend.modules.course.service.CourseService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,20 +47,25 @@ public class CourseController {
     //-------------------------Put the course-------------------------------------------------
     @PutMapping("{id}")
     @PreAuthorize("hasAnyAuthority('TEACHER','ADMIN')")
-    public ResponseEntity<CourseResponse> update(
-            @PathVariable Long id,
-            @RequestBody CourseRequest request){
-        return ResponseEntity.ok(service.update(id, request));
+    public ResponseEntity<CourseResponse> update (@PathVariable Long id, @RequestBody CourseRequest request,
+        Authentication authentication) throws AccessDeniedException {
+        Long userId = Long.valueOf(authentication.getName());
+
+        CourseResponse response = service.update(id, request, userId, authentication);
+
+        return ResponseEntity.ok(response);
     }
 
     //------------------------Delete the course----------------------------------------------------
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('TEACHER', 'ADMIN')")
     public ResponseEntity<Void> delete(
-            @PathVariable Long id
-    ) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
+            @PathVariable Long id,
+            Authentication authentication
+    )throws AccessDeniedException {
+       Long userId = Long.valueOf(authentication.getName());
+       service.delete(id, userId, authentication);
+       return ResponseEntity.noContent().build();
     }
 
 

@@ -1,5 +1,6 @@
 package org.backend.modules.quiz.mapper;
 
+import lombok.RequiredArgsConstructor;
 import org.backend.domains.assessment.Quiz;
 import org.backend.domains.learning.Lesson;
 import org.backend.modules.lesson.dto.LessonRequest;
@@ -8,9 +9,11 @@ import org.backend.modules.quiz.dto.QuizResponse;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class QuizMapper {
 
     private final QuestionMapper questionMapper;
+
     public QuizResponse toResponse(Quiz quiz){
 
         return QuizResponse.builder()
