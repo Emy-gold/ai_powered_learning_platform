@@ -2,6 +2,7 @@ package org.backend.modules.question.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.backend.domains.assessment.Question;
+import org.backend.modules.answer.mapper.AnswerMapper;
 import org.backend.modules.question.dto.QuestionRequest;
 import org.backend.modules.question.dto.QuestionResponse;
 import org.backend.modules.quiz.dto.QuizResponse;
