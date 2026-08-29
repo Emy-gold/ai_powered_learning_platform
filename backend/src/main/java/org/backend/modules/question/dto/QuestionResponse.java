@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.backend.domains.assessment.QuestionType;
 import org.backend.modules.answer.dto.AnswerResponse;
 import org.backend.modules.quiz.dto.QuizResponse;
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class QuestionResponse {
 
     private Long id;

@@ -2,8 +2,7 @@ package org.backend.modules.quiz.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.backend.domains.assessment.Quiz;
-import org.backend.domains.learning.Lesson;
-import org.backend.modules.lesson.dto.LessonRequest;
+import org.backend.modules.question.mapper.QuestionMapper;
 import org.backend.modules.quiz.dto.QuizRequest;
 import org.backend.modules.quiz.dto.QuizResponse;
 import org.springframework.stereotype.Component;
