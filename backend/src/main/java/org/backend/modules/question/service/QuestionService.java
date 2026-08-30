@@ -8,7 +8,6 @@ import org.backend.modules.question.dto.QuestionRequest;
 import org.backend.modules.question.dto.QuestionResponse;
 import org.backend.modules.question.mapper.QuestionMapper;
 import org.backend.modules.question.repository.QuestionRepository;
-import org.backend.modules.quiz.mapper.QuizMapper;
 import org.backend.modules.quiz.repository.QuizRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
