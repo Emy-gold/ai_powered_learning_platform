@@ -1,6 +1,5 @@
 package org.backend.modules.course.service;
 
-import org.backend.domains.learning.Lesson;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
