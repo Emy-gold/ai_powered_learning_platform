@@ -17,6 +17,8 @@ public class StudentAnswerResponse {
 
     private Long questionId;
 
+    private Long studentId;
+
     private Long answerId;
 
     private boolean correct;

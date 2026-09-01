@@ -1,16 +1,13 @@
 package org.backend.domains.assessment;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
-import org.backend.domains.learning.Course;
+import org.backend.domains.profile.StudentProfile;
 
 import java.time.LocalDateTime;
 
@@ -36,4 +33,12 @@ public class StudentAnswer extends BaseEntity {
     @JoinColumn(name = "answer_id")
     private Answer answer;
 
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private StudentProfile student;
+
+    @PrePersist
+    protected void onSubmit() {
+        submittedAt = LocalDateTime.now();
+    }
 }
