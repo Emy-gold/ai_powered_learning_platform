@@ -1,6 +1,7 @@
 package org.backend.modules.studentAnswer.mapper;
 
 import org.backend.domains.assessment.StudentAnswer;
+import org.backend.modules.studentAnswer.dto.StudentAnswerRequest;
 import org.backend.modules.studentAnswer.dto.StudentAnswerResponse;
 import org.springframework.stereotype.Component;
 
@@ -17,5 +18,12 @@ public class StudentAnswerMapper {
                 .correct(studentAnswer.isCorrect())
                 .submittedAt(studentAnswer.getSubmittedAt())
                 .build();
+    }
+
+    public StudentAnswer toEntity(StudentAnswerRequest request) {
+
+        StudentAnswer studentAnswer = new StudentAnswer();
+
+        return studentAnswer;
     }
 }

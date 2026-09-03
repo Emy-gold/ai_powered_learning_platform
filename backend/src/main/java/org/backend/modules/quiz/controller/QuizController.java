@@ -1,7 +1,6 @@
 package org.backend.modules.quiz.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.quiz.dto.QuizRequest;
 import org.backend.modules.quiz.dto.QuizResponse;
 import org.backend.modules.quiz.service.QuizService;

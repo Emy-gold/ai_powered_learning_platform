@@ -8,7 +8,6 @@ import org.backend.modules.answer.dto.AnswerRequest;
 import org.backend.modules.answer.dto.AnswerResponse;
 import org.backend.modules.answer.mapper.AnswerMapper;
 import org.backend.modules.answer.repository.AnswerRepository;
-import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.question.repository.QuestionRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
