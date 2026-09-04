@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.backend.domains.commun.BaseEntity;
 import org.backend.domains.profile.StudentProfile;
 import org.backend.domains.user.User;
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@SuperBuilder
 public class Enrollment extends BaseEntity {
 
     private LocalDateTime enrollmentDate;
