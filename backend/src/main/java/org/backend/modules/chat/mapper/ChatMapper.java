@@ -40,6 +40,7 @@ public class ChatMapper {
     public Chat toEntity(ChatRequest request){
         Chat chat = new Chat();
         chat.setTitle(request.getTitle());
+        chat.setGroup(request.getParticipantIds().size() > 1);
         return chat;
     }
 }

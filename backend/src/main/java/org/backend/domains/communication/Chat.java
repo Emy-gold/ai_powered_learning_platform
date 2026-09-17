@@ -19,6 +19,7 @@ import java.util.List;
 public class Chat extends BaseEntity {
 
     private String title;
+    private boolean group;
 
     @OneToMany(
             mappedBy = "chat",

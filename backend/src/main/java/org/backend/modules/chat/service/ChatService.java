@@ -8,6 +8,7 @@ import org.backend.domains.user.User;
 import org.backend.modules.chat.dto.ChatRequest;
 import org.backend.modules.chat.dto.ChatResponse;
 import org.backend.modules.chat.mapper.ChatMapper;
+import org.backend.modules.chat.repository.ChatParticipantRepository;
 import org.backend.modules.chat.repository.ChatRepository;
 import org.backend.modules.user.repositories.UserRepository;
 import org.springframework.security.access.AccessDeniedException;
@@ -21,33 +22,31 @@ import java.util.List;
 public class ChatService {
 
     private final ChatRepository chatRepository;
+    private final ChatParticipantRepository chatParticipantRepository;
     private final UserRepository userRepository;
     private final ChatMapper chatMapper;
 
-    //-------------------------------Create a chat---------------------------------
     @Transactional
     public ChatResponse create(ChatRequest request, Long creatorId){
 
         Chat chat = chatMapper.toEntity(request);
 
-        List<ChatParticipant> participants = new ArrayList<>();
-
-        // make sure the creator is always included, even if the client forgot to list them
         List<Long> participantIds = new ArrayList<>(request.getParticipantIds());
         if (!participantIds.contains(creatorId)) {
             participantIds.add(creatorId);
         }
 
+        chat.setGroup(participantIds.size() > 2);
+
+        List<ChatParticipant> participants = new ArrayList<>();
         for (Long userId : participantIds) {
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new RuntimeException("User not found: " + userId));
 
-            ChatParticipant participant = ChatParticipant.builder()
+            participants.add(ChatParticipant.builder()
                     .chat(chat)
                     .user(user)
-                    .build();
-
-            participants.add(participant);
+                    .build());
         }
 
         chat.setParticipants(participants);
@@ -55,7 +54,6 @@ public class ChatService {
         return chatMapper.toResponse(chatRepository.save(chat));
     }
 
-    //-------------------------------Get chat by id, scoped to a participant--------
     public ChatResponse getById(Long id, Long userId){
         Chat chat = chatRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Chat not found"));
@@ -70,7 +68,6 @@ public class ChatService {
         return chatMapper.toResponse(chat);
     }
 
-    //-------------------------------Get all chats for the current user-------------
     public List<ChatResponse> getMyChats(Long userId){
         List<ChatResponse> chats = new ArrayList<>();
         for (Chat chat : chatRepository.findByParticipantsUserId(userId)) {
@@ -79,10 +76,10 @@ public class ChatService {
         return chats;
     }
 
-    //-------------------------------Delete/leave a chat-----------------------------
     @Transactional
-    public void delete(Long id, Long userId){
-        Chat chat = chatRepository.findById(id)
+    public void leave(Long chatId, Long userId){
+
+        Chat chat = chatRepository.findById(chatId)
                 .orElseThrow(() -> new RuntimeException("Chat not found"));
 
         boolean isParticipant = chat.getParticipants().stream()
@@ -92,6 +89,15 @@ public class ChatService {
             throw new AccessDeniedException("You are not a participant in this chat");
         }
 
-        chatRepository.delete(chat);
+        if (!chat.isGroup()) {
+            chatRepository.delete(chat);
+            return;
+        }
+
+        ChatParticipant participant = chatParticipantRepository
+                .findByChatIdAndUserId(chatId, userId)
+                .orElseThrow(() -> new RuntimeException("You are not a participant in this chat"));
+
+        chatParticipantRepository.delete(participant);
     }
 }
