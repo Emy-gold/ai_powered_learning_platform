@@ -1,9 +1,6 @@
 package org.backend.modules.progress.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.backend.modules.course.dto.CourseResponse;
 import org.backend.modules.lesson.dto.LessonResponse;
 import org.backend.modules.student.dto.StudentResponse;
@@ -12,6 +9,7 @@ import org.backend.modules.student.dto.StudentResponse;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProgressResponse {
 
     private Long id;
