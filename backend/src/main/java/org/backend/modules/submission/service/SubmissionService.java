@@ -15,6 +15,7 @@ import org.backend.modules.submission.repository.SubmissionRepository;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,12 @@ public class SubmissionService {
         Submission submission = submissionMapper.toEntity(request);
         submission.setAssignment(assignment);
         submission.setStudent(student);
-        submission.setStatus(submissionStatus.PENDING);
+        submission.setSubmittedAt(LocalDateTime.now());
+
+        submissionStatus status = (assignment.getDueDate() != null && LocalDateTime.now().isAfter(assignment.getDueDate()))
+                ? submissionStatus.LATE
+                : submissionStatus.PENDING;
+        submission.setStatus(status);
 
         return submissionMapper.toResponse(submissionRepository.save(submission));
     }
