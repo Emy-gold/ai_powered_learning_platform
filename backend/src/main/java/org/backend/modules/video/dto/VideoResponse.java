@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.backend.domains.learning.VideoQuality;
 import org.backend.modules.lesson.dto.LessonResponse;
 
@@ -11,6 +12,7 @@ import org.backend.modules.lesson.dto.LessonResponse;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class VideoResponse {
 
     private Long id;
