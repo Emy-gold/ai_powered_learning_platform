@@ -52,7 +52,7 @@ public class ChatController {
             Authentication authentication
     ){
         Long userId = ((User) authentication.getPrincipal()).getId();
-        service.delete(id, userId);
+        service.leave(id, userId);
         return ResponseEntity.noContent().build();
     }
 }

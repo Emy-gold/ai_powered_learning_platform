@@ -20,7 +20,7 @@ public class TeacherController {
     private final TeacherService service;
 
     //-----------------Post endpoint for creating teachers---------------------
-    @PostMapping("{userId/profile}")
+    @PostMapping("{userId}/profile")
     @PreAuthorize("hasAuthority('TEACHER')")
     public ResponseEntity<TeacherResponse> create(
             @PathVariable Long userId,
@@ -48,7 +48,7 @@ public class TeacherController {
     }
 
     //--------------Update the teacher profile----------------------------------
-    @DeleteMapping("{id}/profile")
+    @DeleteMapping("{id}/profiledelete")
     @PreAuthorize("hasAnyAuthority('ADMIN','TEACHER')")
     public ResponseEntity<TeacherResponse> update(
             @PathVariable Long id,
